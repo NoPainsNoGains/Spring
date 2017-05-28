@@ -1,0 +1,23 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	   xmlns:util="http://www.springframework.org/schema/util" 
+	   xmlns:p="http://www.springframework.org/schema/p"
+	   xmlns:tx="http://www.springframework.org/schema/tx"
+	   xsi:schemaLocation="
+			http://www.springframework.org/schema/beans
+			http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+			http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.5.xsd
+			http://www.springframework.org/schema/tx
+   			http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
+ 	
+ 	<!--
+  	<bean id="destructive" class="com.uestc.test.DestructiveBean" destroy-method="destroy">
+      <property name="filePath" value="D:/SourceSpring/file/ymh.txt"/>
+    </bean> 
+    -->
+
+	<bean id="destructive" class="com.uestc.test.DestructiveBeanI">
+      <property name="filePath" value="D:/SourceSpring/file/lxq.txt"/>
+    </bean>
+</beans>

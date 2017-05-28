@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+                http://www.springframework.org/schema/beans
+                http://www.springframework.org/schema/beans/spring-beans.xsd">
+ 	
+ 	<bean id="simpleBean" class="com.uestc.test.SimpleBean">
+ 		<property name="connectionString" value="sb"></property>
+ 		<property name="username" value="YMH"></property>
+ 		<property name="password" value="sx"></property>
+ 	</bean>
+ 	
+ 	 <bean id="bfpp" class="com.uestc.test.ObscenityRemovingBeanFactoryPostProcessor">
+        <property name="obscenities">
+        	<set>
+	        	<value>sb</value>
+	        	<value>sx</value>
+        	</set>
+        </property>
+    </bean>
+</beans>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+                http://www.springframework.org/schema/beans
+                http://www.springframework.org/schema/beans/spring-beans.xsd">
+ 	
+ 
+ 	 <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://localhost:3306/transaction?useUnicode=true&amp;characterEncoding=UTF-8"/>
+        <property name="username" value="root"/>
+        <property name="password" value="123456"/>
+    </bean>
+ 
+ 	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+	    <property name="dataSource" ref="dataSource" />
+	</bean>
+	
+	<bean id="bankDaoImpl" class="com.uestc.dao.impl.BankDaoImpl">
+	   <property name="dataSource" ref="dataSource" />
+	</bean>
+ 	
+ 	<bean id="bankServiceImpl" class=" com.uestc.service.impl.BankServiceImpl">
+	   <property name="bankDaoImpl" ref="bankDaoImpl" /> 
+	</bean>
+	<!-- 每个Bean都有一个代理 -->
+	<bean id="bankServiceTransaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean"> 
+		<!-- 配置事务 -->
+	    <property name="transactionManager">
+	    	<ref bean="transactionManager" />
+	    </property>
+	    <!-- 此属性指定目标类本省是否是代理的对象，如果目标类没有实现任何类，就设为true代表自己 -->
+	    <property name="proxyTargetClass">
+   			<value>false</value>
+   		</property>
+   		<property name="proxyInterfaces">
+    		<value>com.uestc.service.BankService</value>
+   		</property>
+   		<!-- 目标bean -->
+        <property name="target" ref="bankServiceImpl" /> 
+         <!-- 配置事务属性 -->  
+        <property name="transactionAttributes">
+		    <props>
+		     <prop key="delete*">PROPAGATION_REQUIRED</prop>
+		     <prop key="add*">PROPAGATION_REQUIRED</prop>
+		     <prop key="update*">PROPAGATION_REQUIRED</prop>
+		     <prop key="save*">PROPAGATION_REQUIRED</prop>
+		     <prop key="find*">PROPAGATION_REQUIRED,readOnly</prop>
+		    </props>
+		 </property>
+    </bean>
+
+</beans>

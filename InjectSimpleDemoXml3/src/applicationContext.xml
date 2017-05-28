@@ -1,0 +1,28 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	   xmlns:util="http://www.springframework.org/schema/util" 
+	   xmlns:p="http://www.springframework.org/schema/p"
+	   xmlns:tx="http://www.springframework.org/schema/tx"
+	   xsi:schemaLocation="
+			http://www.springframework.org/schema/beans
+			http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+			http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.5.xsd
+			http://www.springframework.org/schema/tx
+   			http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
+	
+<!-- 	<bean id="injectSimpleDemo" class="com.uestc.test.InjectSimpleDemo">
+		<property name="name" value="YMH"/>
+		<property name="age" value="35"/>
+		<property name="height" value="1.789"/>
+		<property name="isProgrammer" value="true"/>
+		<property name="ageInSeconds" value="1103760000"/>
+	</bean> -->
+	<bean id="injectSimpleDemo" class="com.uestc.test.InjectSimpleDemo"
+		p:name="LXQ"
+		p:age="36"
+		p:height="1.789"
+		p:isProgrammer="false"
+		p:ageInSeconds="123456789"
+	/>
+</beans>
